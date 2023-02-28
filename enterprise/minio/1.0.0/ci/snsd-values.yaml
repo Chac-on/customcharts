@@ -1,0 +1,15 @@
+# When inside the versioned minio folder, run:
+# helm dependency update
+# helm template -f ix_values.yaml -f ci/basic-values.yaml .
+
+# Always use a unique hostPath for each test
+
+minio:
+  creds:
+    root_user: minio_test
+    root_pass: minio_test
+  storage:
+    - type: hostPath
+      hostPath: /mnt/{{ .Release.Namespace }}/data1
+      datasetName: ""
+      mountPath: /data1
