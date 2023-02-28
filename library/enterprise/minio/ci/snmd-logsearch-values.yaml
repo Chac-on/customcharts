@@ -1,0 +1,42 @@
+# When inside the versioned minio folder, run:
+# helm dependency update
+# helm template -f ix_values.yaml -f ci/logsearch-values.yaml .
+
+# Always use a unique hostPath for each test
+
+minio:
+  creds:
+    root_user: minio_test
+    root_pass: minio_test
+  multi_mode:
+    - /data{1...4}
+  storage:
+    - type: hostPath
+      hostPath: /mnt/{{ .Release.Namespace }}/data1
+      datasetName: ""
+      mountPath: /data1
+    - type: hostPath
+      hostPath: /mnt/{{ .Release.Namespace }}/data2
+      datasetName: ""
+      mountPath: /data2
+    - type: hostPath
+      hostPath: /mnt/{{ .Release.Namespace }}/data3
+      datasetName: ""
+      mountPath: /data3
+    - type: hostPath
+      hostPath: /mnt/{{ .Release.Namespace }}/data4
+      datasetName: ""
+      mountPath: /data4
+
+logsearch:
+  enabled: true
+  disk_capacity_gb: 5
+  storage:
+    postgres_data:
+      type: hostPath
+      hostPath: /mnt/{{ .Release.Namespace }}/postgres_data
+      datasetName: ""
+    postgres_backup:
+      type: hostPath
+      hostPath: /mnt/{{ .Release.Namespace }}/postgres_backup
+      datasetName: ""

@@ -1,0 +1,18 @@
+{{- include "ix.v1.common.loader.init" . -}}
+
+{{/* Merge the templates with Values  */}}
+{{- $_ := mustMergeOverwrite .Values (include "minio.configuration" $ | fromYaml) -}}
+
+{{- $_ := mustMergeOverwrite .Values (include "minio.workload" $ | fromYaml) -}}
+{{- if .Values.logsearch.enabled -}}
+  {{- $_ := mustMergeOverwrite .Values (include "logsearch.workload" $ | fromYaml) -}}
+  {{- $_ := mustMergeOverwrite .Values (include "postgres.workload" $ | fromYaml) -}}
+{{- end -}}
+
+{{/* Create the configmap for portal manually*/}}
+{{- include "minio.portal" $ -}}
+
+{{- $portals := .Values.iXPortals -}}
+{{- $portals = mustAppend $portals (dict "portalName" "dynamic" "protocol" "http" "useNodeIP" true "port" 30000 "path" "/")  -}}
+{{- $_ := set .Values "iXPortals" $portals -}}
+{{- include "ix.v1.common.loader.apply" . -}}
