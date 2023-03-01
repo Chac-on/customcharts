@@ -11,10 +11,6 @@ workload:
           enabled: true
           primary: true
           imageSelector: image
-          resources:
-            limits:
-              cpu: {{ .Values.resources.limits.cpu }}
-              memory: {{ .Values.resources.limits.memory }}
           envFrom:
             - secretRef:
                 name: minio-creds
