@@ -1,4 +1,5 @@
 icon_url: https://min.io/resources/img/logo/MINIO_wordmark.png
 categories:
 - storage
-- s3
+- object-storage
+- S3
