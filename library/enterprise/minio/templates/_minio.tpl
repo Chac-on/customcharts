@@ -18,8 +18,6 @@ workload:
           envFrom:
             - secretRef:
                 name: minio-creds
-            - configMapRef:
-                name: minio-config
           args:
             - server
             - "--address"

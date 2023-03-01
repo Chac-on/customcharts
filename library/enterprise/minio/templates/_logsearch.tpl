@@ -16,8 +16,6 @@ workload:
           envFrom:
             - secretRef:
                 name: logsearch-creds
-            - configMapRef:
-                name: logsearch-config
           command: /logsearchapi
           probes:
             liveness:
@@ -41,8 +39,8 @@ workload:
           type: init
           imageSelector: imagePostgres
           envFrom:
-            - configMapRef:
-                name: postgres-config
+            - secretRef:
+                name: postgres-creds
           resources:
             limits:
               cpu: 500m
