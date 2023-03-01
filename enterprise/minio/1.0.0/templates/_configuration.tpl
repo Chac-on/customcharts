@@ -10,13 +10,13 @@ secret:
   minio-creds:
     enabled: true
     data:
-      MINIO_ROOT_USER: {{ .Values.minio.creds.root_user }}
-      MINIO_ROOT_PASSWORD: {{ .Values.minio.creds.root_pass }}
+      MINIO_ROOT_USER: {{ .Values.minio.creds.rootUser }}
+      MINIO_ROOT_PASSWORD: {{ .Values.minio.creds.rootPass }}
       MINIO_VOLUMES: {{ $config.volumes }}
-      {{ with .Values.minio.network.server_url }}
+      {{ with .Values.minio.network.serverUrl }}
       MINIO_SERVER_URL: {{ . | quote }}
       {{ end }}
-      {{ with .Values.minio.network.console_url }}
+      {{ with .Values.minio.network.consoleUrl }}
       MINIO_BROWSER_REDIRECT_URL: {{ . | quote }}
       {{ end }}
       {{ if .Values.logsearch.enabled }}
@@ -49,13 +49,13 @@ secret:
       POSTGRES_URL: {{ $config.postgresURL }}
 
 {{/* MinIO Certificate */}}
-{{ if .Values.minio.network.certificate_id }}
+{{ if .Values.minio.network.certificateID }}
 scaleCertificate:
   minio-cert:
     enabled: true
     labels: {}
     annotations: {}
-    id: {{ .Values.minio.network.certificate_id }}
+    id: {{ .Values.minio.network.certificateID }}
 {{ end }}
 
 {{- end -}}

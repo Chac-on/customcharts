@@ -6,8 +6,8 @@
 
 minio:
   creds:
-    root_user: minio_test
-    root_pass: minio_test
+    rootUser: minio_test
+    rootPass: minio_test
   storage:
     - type: hostPath
       hostPath: /mnt/{{ .Release.Namespace }}/data1

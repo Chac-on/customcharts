@@ -6,8 +6,8 @@
 
 minio:
   creds:
-    root_user: minio_test
-    root_pass: minio_test
+    rootUser: minio_test
+    rootPass: minio_test
   storage:
     - type: hostPath
       hostPath: /mnt/{{ .Release.Namespace }}/data1
@@ -16,13 +16,13 @@ minio:
 
 logsearch:
   enabled: true
-  disk_capacity_gb: 5
+  diskCapacityGB: 5
   storage:
-    postgres_data:
+    pgData:
       type: hostPath
       hostPath: /mnt/{{ .Release.Namespace }}/postgres_data
       datasetName: ""
-    postgres_backup:
+    pgBackup:
       type: hostPath
       hostPath: /mnt/{{ .Release.Namespace }}/postgres_backup
       datasetName: ""

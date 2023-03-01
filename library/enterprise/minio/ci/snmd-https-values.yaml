@@ -8,11 +8,11 @@
 
 minio:
   creds:
-    root_user: minio_test
-    root_pass: minio_test
+    rootUser: minio_test
+    rootPass: minio_test
   network:
-    certificate_id: 1
-  multi_mode:
+    certificateID: 1
+  multiMode:
     - /data{1...4}
   storage:
     - type: hostPath

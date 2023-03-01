@@ -1,7 +1,7 @@
 {{/* Scheme */}}
 {{- define "minio.scheme" -}}
   {{- $scheme := "http" -}}
-  {{- if .Values.minio.network.certificate_id -}}
+  {{- if .Values.minio.network.certificateID -}}
     {{- $scheme = "https" -}}
   {{- end -}}
 
@@ -10,19 +10,19 @@
 
 {{/* Validation */}}
 {{- define "minio.validation" -}}
-  {{- if not .Values.minio.creds.root_user -}}
-    {{- fail "Expected non-empty <root_user>" -}}
+  {{- if not .Values.minio.creds.rootUser -}}
+    {{- fail "Expected non-empty <rootUser>" -}}
   {{- end -}}
 
-  {{- if not .Values.minio.creds.root_pass -}}
-    {{- fail "Expected non-empty <root_pass>" -}}
+  {{- if not .Values.minio.creds.rootPass -}}
+    {{- fail "Expected non-empty <rootPass>" -}}
   {{- end -}}
 
   {{- if not .Values.minio.storage -}}
     {{- fail "Expected at least 1 storage item added" -}}
   {{- end -}}
 
-  {{- if and (ne (len .Values.minio.storage) 1) (not .Values.minio.multi_mode) -}}
+  {{- if and (ne (len .Values.minio.storage) 1) (not .Values.minio.multiMode) -}}
     {{- fail "Expected Multi Mode to be enabled, when more than 1 storage items added" -}}
   {{- end -}}
 {{- end -}}
@@ -35,7 +35,7 @@
   {{- $fullname := (include "ix.v1.common.lib.chart.names.fullname" $) -}}
 
   {{- if .Values.logsearch.enabled -}}
-    {{- $_ := set $config "diskCapacity" (required "Expected non-empty <disk_capacity_gb>" .Values.logsearch.disk_capacity_gb) -}}
+    {{- $_ := set $config "diskCapacity" (required "Expected non-empty <disk_capacity_gb>" .Values.logsearch.diskCapacityGB) -}}
   {{- end -}}
 
   {{- $_ := set $config "dbUser" "logsearch" -}}
@@ -63,8 +63,8 @@
 
   {{/* When no multi mode, use the first storage entry */}}
   {{- $_ := set $config "volumes" (.Values.minio.storage | first).mountPath -}}
-  {{- if .Values.minio.multi_mode -}}
-    {{- $_ := set $config "volumes" (join " " .Values.minio.multi_mode) -}}
+  {{- if .Values.minio.multiMode -}}
+    {{- $_ := set $config "volumes" (join " " .Values.minio.multiMode) -}}
   {{- end -}}
 
   {{- if not $config.volumes -}}

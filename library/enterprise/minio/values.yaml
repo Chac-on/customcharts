@@ -20,30 +20,30 @@ resources:
 
 minio:
   creds:
-    root_user: ""
-    root_pass: ""
+    rootUser: ""
+    rootPass: ""
   network:
-    api_port: 30000
-    web_port: 30001
-    certificate_id: ""
-    host_network: false
-    server_url: ""
-    console_url: ""
+    apiPort: 30000
+    webPort: 30001
+    certificateID: ""
+    hostNetwork: false
+    serverUrl: ""
+    consoleUrl: ""
   logging:
     anonymous: false
     quiet: false
-  multi_mode: []
+  multiMode: []
   storage: []
 
 logsearch:
   enabled: false
-  disk_capacity_gb: 5
+  diskCapacityGB: 5
   storage:
-    postgres_data:
+    pgData:
       type: ixVolume
       hostPath: ""
       datasetName: postgres-data
-    postgres_backup:
+    pgBackup:
       type: ixVolume
       hostPath: ""
       datasetName: postgres-backup

@@ -5,7 +5,7 @@ workload:
     primary: true
     type: Deployment
     podSpec:
-      hostNetwork: {{ .Values.minio.network.host_network }}
+      hostNetwork: {{ .Values.minio.network.hostNetwork }}
       containers:
         minio:
           enabled: true
@@ -21,10 +21,10 @@ workload:
           args:
             - server
             - "--address"
-            - {{ printf ":%v" .Values.minio.network.api_port | quote }}
+            - {{ printf ":%v" .Values.minio.network.apiPort | quote }}
             - "--console-address"
-            - {{ printf ":%v" .Values.minio.network.web_port | quote }}
-            {{- if .Values.minio.network.certificate_id }}
+            - {{ printf ":%v" .Values.minio.network.webPort | quote }}
+            {{- if .Values.minio.network.certificateID }}
             - "--certs-dir"
             - "/.minio/certs"
             {{- end -}}
@@ -38,17 +38,17 @@ workload:
             liveness:
               enabled: true
               type: {{ include "minio.scheme" $ }}
-              port: "{{ .Values.minio.network.api_port }}"
+              port: "{{ .Values.minio.network.apiPort }}"
               path: /minio/health/live
             readiness:
               enabled: true
               type: {{ include "minio.scheme" $ }}
-              port: "{{ .Values.minio.network.api_port }}"
+              port: "{{ .Values.minio.network.apiPort }}"
               path: /minio/health/live
             startup:
               enabled: true
               type: {{ include "minio.scheme" $ }}
-              port: "{{ .Values.minio.network.api_port }}"
+              port: "{{ .Values.minio.network.apiPort }}"
               path: /minio/health/live
       initContainers:
       {{- include "ix.v1.common.app.permissions" (dict "UID" 568 "GID" 568) | nindent 8 -}}
@@ -87,13 +87,13 @@ service:
       api:
         enabled: true
         primary: true
-        port: {{ .Values.minio.network.api_port }}
-        nodePort: {{ .Values.minio.network.api_port }}
+        port: {{ .Values.minio.network.apiPort }}
+        nodePort: {{ .Values.minio.network.apiPort }}
         targetSelector: minio
       webui:
         enabled: true
-        port: {{ .Values.minio.network.web_port }}
-        nodePort: {{ .Values.minio.network.web_port }}
+        port: {{ .Values.minio.network.webPort }}
+        nodePort: {{ .Values.minio.network.webPort }}
         targetSelector: minio
 
 {{/* Persistence */}}
@@ -120,7 +120,7 @@ persistence:
       minio:
         minio:
           mountPath: /.minio
-  {{- if .Values.minio.network.certificate_id }}
+  {{- if .Values.minio.network.certificateID }}
   cert:
     enabled: true
     type: secret

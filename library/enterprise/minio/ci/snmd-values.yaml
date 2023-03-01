@@ -6,9 +6,9 @@
 
 minio:
   creds:
-    root_user: minio_test
-    root_pass: minio_test
-  multi_mode:
+    rootUser: minio_test
+    rootPass: minio_test
+  multiMode:
     - /data{1...4}
   storage:
     - type: hostPath

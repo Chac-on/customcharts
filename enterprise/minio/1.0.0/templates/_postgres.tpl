@@ -19,24 +19,30 @@ service:
 persistence:
   postgresdata:
     enabled: true
-    type: {{ .Values.logsearch.storage.postgres_data.type }}
-    datasetName: {{ .Values.logsearch.storage.postgres_data.datasetName | default "" }}
-    hostPath: {{ .Values.logsearch.storage.postgres_data.hostPath | default "" }}
+    type: {{ .Values.logsearch.storage.pgData.type }}
+    datasetName: {{ .Values.logsearch.storage.pgData.datasetName | default "" }}
+    hostPath: {{ .Values.logsearch.storage.pgData.hostPath | default "" }}
     targetSelector:
+      # Postgres pod
       postgres:
+        # Postgres container
         postgres:
           mountPath: /var/lib/postgresql/data
+        # Permissions container
         permissions:
           mountPath: /mnt/directories/posgres_data
   postgresbackup:
     enabled: true
-    type: {{ .Values.logsearch.storage.postgres_backup.type }}
-    datasetName: {{ .Values.logsearch.storage.postgres_backup.datasetName | default "" }}
-    hostPath: {{ .Values.logsearch.storage.postgres_backup.hostPath | default "" }}
+    type: {{ .Values.logsearch.storage.pgBackup.type }}
+    datasetName: {{ .Values.logsearch.storage.pgBackup.datasetName | default "" }}
+    hostPath: {{ .Values.logsearch.storage.pgBackup.hostPath | default "" }}
     targetSelector:
+      # Postgres backup pod
       postgresbackup:
+        # Postgres backup container
         postgresbackup:
           mountPath: /postgres_backup
+        # Permissions container
         permissions:
           mountPath: /mnt/directories/posgres_backup
 {{- end -}}
