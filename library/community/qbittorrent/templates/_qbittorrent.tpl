@@ -14,10 +14,6 @@ workload:
           securityContext:
             runAsUser: {{ .Values.qbittorrent.runAs.user }}
             runAsGroup: {{ .Values.qbittorrent.runAs.group }}
-          resources:
-            limits:
-              cpu: {{ .Values.resources.limits.cpu }}
-              memory: {{ .Values.resources.limits.memory }}
           envFrom:
             - configMapRef:
                 name: qbit-config
