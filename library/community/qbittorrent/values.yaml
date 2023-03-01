@@ -10,10 +10,10 @@ resources:
 
 qbittorrent:
   network:
-    web_port: 30000
-    bt_port: 50413
-    host_network: false
-  run_as:
+    webPort: 30000
+    btPort: 50413
+    hostNetwork: false
+  runAs:
     user: 568
     group: 568
   storage:

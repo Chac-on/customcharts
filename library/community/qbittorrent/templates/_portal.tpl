@@ -6,7 +6,7 @@ metadata:
   name: portal
 data:
   path: "/"
-  port: {{ .Values.qbittorrent.network.web_port | quote }}
+  port: {{ .Values.qbittorrent.network.webPort | quote }}
   protocol: http
   host: $node_ip
 {{- end -}}

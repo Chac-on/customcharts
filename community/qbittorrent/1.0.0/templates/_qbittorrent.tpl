@@ -5,15 +5,15 @@ workload:
     primary: true
     type: Deployment
     podSpec:
-      hostNetwork: {{ .Values.qbittorrent.network.host_network }}
+      hostNetwork: {{ .Values.qbittorrent.network.hostNetwork }}
       containers:
         qbittorrent:
           enabled: true
           primary: true
           imageSelector: image
           securityContext:
-            runAsUser: {{ .Values.qbittorrent.run_as.user }}
-            runAsGroup: {{ .Values.qbittorrent.run_as.group }}
+            runAsUser: {{ .Values.qbittorrent.runAs.user }}
+            runAsGroup: {{ .Values.qbittorrent.runAs.group }}
           resources:
             limits:
               cpu: {{ .Values.resources.limits.cpu }}
@@ -25,20 +25,20 @@ workload:
             liveness:
               enabled: true
               type: http
-              port: "{{ .Values.qbittorrent.network.web_port }}"
+              port: "{{ .Values.qbittorrent.network.webPort }}"
               path: /
             readiness:
               enabled: true
               type: http
-              port: "{{ .Values.qbittorrent.network.web_port }}"
+              port: "{{ .Values.qbittorrent.network.webPort }}"
               path: /
             startup:
               enabled: true
               type: http
-              port: "{{ .Values.qbittorrent.network.web_port }}"
+              port: "{{ .Values.qbittorrent.network.webPort }}"
               path: /
       initContainers:
-      {{- include "ix.v1.common.app.permissions" (dict "UID" .Values.qbittorrent.run_as.user "GID" .Values.qbittorrent.run_as.group "type" "init") | nindent 8 -}}
+      {{- include "ix.v1.common.app.permissions" (dict "UID" .Values.qbittorrent.runAs.user "GID" .Values.qbittorrent.runAs.group "type" "init") | nindent 8 -}}
 
 {{/* Service */}}
 service:
@@ -51,8 +51,8 @@ service:
       webui:
         enabled: true
         primary: true
-        port: {{ .Values.qbittorrent.network.web_port }}
-        nodePort: {{ .Values.qbittorrent.network.web_port }}
+        port: {{ .Values.qbittorrent.network.webPort }}
+        nodePort: {{ .Values.qbittorrent.network.webPort }}
         targetSelector: qbittorrent
   qbittorrent-bt:
     enabled: true
@@ -62,14 +62,14 @@ service:
       bt-tcp:
         enabled: true
         primary: true
-        port: {{ .Values.qbittorrent.network.bt_port }}
-        nodePort: {{ .Values.qbittorrent.network.bt_port }}
+        port: {{ .Values.qbittorrent.network.btPort }}
+        nodePort: {{ .Values.qbittorrent.network.btPort }}
         targetSelector: qbittorrent
       bt-upd:
         enabled: true
         primary: true
-        port: {{ .Values.qbittorrent.network.bt_port }}
-        nodePort: {{ .Values.qbittorrent.network.bt_port }}
+        port: {{ .Values.qbittorrent.network.btPort }}
+        nodePort: {{ .Values.qbittorrent.network.btPort }}
         protocol: udp
         targetSelector: qbittorrent
 

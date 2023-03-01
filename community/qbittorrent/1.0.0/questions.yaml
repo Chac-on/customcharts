@@ -22,7 +22,7 @@ questions:
       type: dict
       attrs:
 
-        - variable: run_as
+        - variable: runAs
           label: User and Group Configuration
           schema:
             type: dict
@@ -49,7 +49,7 @@ questions:
           schema:
             type: dict
             attrs:
-              - variable: web_port
+              - variable: webPort
                 label: Web Port
                 description: The port for the qBittorrent Web UI.
                 schema:
@@ -58,7 +58,7 @@ questions:
                   min: 9000
                   max: 65535
                   required: true
-              - variable: bt_port
+              - variable: btPort
                 label: BT Port
                 description: The port for the qBittorrent BitTorrent protocol. Both TCP and UDP
                 schema:
@@ -67,7 +67,7 @@ questions:
                   min: 9000
                   max: 65535
                   required: true
-              - variable: host_network
+              - variable: hostNetwork
                 label: Host Network
                 description: |
                   Bind to the host network. It's recommended to keep this disabled.</br>

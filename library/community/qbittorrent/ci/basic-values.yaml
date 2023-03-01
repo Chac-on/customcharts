@@ -1,9 +1,9 @@
 qbittorrent:
   network:
-    web_port: 30000
-    bt_port: 32555
-    host_network: false
-  run_as:
+    webPort: 30000
+    btPort: 32555
+    hostNetwork: false
+  runAs:
     user: 1000
     group: 1000
   storage:
