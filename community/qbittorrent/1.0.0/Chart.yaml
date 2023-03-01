@@ -14,7 +14,7 @@ dependencies:
 - name: common
   repository: file://../../../library/common/1.0.0
   version: 1.0.0
-home: https://min.io
+home: https://www.qbittorrent.org/
 icon: https://upload.wikimedia.org/wikipedia/commons/9/9e/Qbittorrent_logo.png
 sources:
 - https://github.com/onedr0p/containers/tree/main/apps/qbittorrent
